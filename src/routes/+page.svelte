@@ -1,31 +1,36 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import Notes from './Notes.svelte';
+	const notes = `
+5
+2 3 4
+3 2 1
+1 3 5
+4 3 2
+3 4 5
+3
+1 1
+4 6 1′
+7 6 5
+3 5 4
+3 2  2
+3 4 5
+3 1 1
+`.trim();
+
+let counter = 0;
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Kalimba</title>
+	<meta name="description" content="Kalimba" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
+	<h1 on:click={() => counter++}>
+		Kalimbabe
 	</h1>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+	<Notes notes={notes} currentPosition={counter} />
 </section>
 
 <style>
@@ -39,21 +44,5 @@
 
 	h1 {
 		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
 	}
 </style>
