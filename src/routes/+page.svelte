@@ -18,6 +18,9 @@
 `.trim();
 
 let counter = 0;
+setInterval?.(() => {
+	counter++;
+}, 1000);
 </script>
 
 <svelte:head>
