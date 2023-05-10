@@ -3,7 +3,7 @@
 	export let currentPosition = 0;
 
 	let noteIndex = 0;
-	const notesStruct = notes.split('\n').map((note) => {
+	const notesStruct = notes.split('\n').map((note, lineIndex) => {
 		const noteLine = note.split(' ').map((n) => ({
 			index: noteIndex++,
 			note: n
@@ -11,21 +11,28 @@
 		const startNoteIndex = noteLine[0]?.index || 0;
 		const endNoteIndex = noteIndex;
 		return {
+			index: lineIndex,
 			start: startNoteIndex,
 			end: endNoteIndex,
 			notes: noteLine,
 		}
 	});
-	console.log('noteStruct', notesStruct);
-	let maxIndex = noteIndex;
+	$: currentPositionNormalized = currentPosition % noteIndex;
+	$: currentLineIndex = notesStruct.find((noteLine) => noteLine.start <= currentPositionNormalized && noteLine.end > currentPositionNormalized).index;
 </script>
 
 
 <div class="notes">
 	{#each notesStruct as noteLine}
-		<h1 class="noteLine {noteLine.start <= (currentPosition % maxIndex) && noteLine.end > (currentPosition % maxIndex) ? 'highlighted' : ''}">
+		<h1
+			class="noteLine"
+			class:highlighted={noteLine.index === currentLineIndex}
+		>
 			{#each noteLine.notes as note}
-					<span class={`note ${(currentPosition % maxIndex) === note.index ? 'highlighted' : ''}`}>
+					<span
+						class="note"
+						class:highlighted={currentPositionNormalized === note.index}
+					>
 						{note.note}
 					</span>
 			{/each}
@@ -39,7 +46,10 @@
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 		margin: 1rem 0;
 		height: 100%;
-		letter-spacing: 1rem;
+	}
+
+	.note {
+		margin: 0 1rem;
 	}
 
 	.noteLine.highlighted {

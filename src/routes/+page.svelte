@@ -12,7 +12,7 @@
 4 6 1′
 7 6 5
 3 5 4
-3 2  2
+3 2 2
 3 4 5
 3 1 1
 `.trim();
@@ -29,10 +29,6 @@ setInterval?.(() => {
 </svelte:head>
 
 <section>
-	<h1 on:click={() => counter++}>
-		Kalimbabe
-	</h1>
-
 	<Notes notes={notes} currentPosition={counter} />
 </section>
 
@@ -43,9 +39,5 @@ setInterval?.(() => {
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
 	}
 </style>
