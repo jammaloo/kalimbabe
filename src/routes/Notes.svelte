@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let notes = '';
 	export let currentPosition = 0;
+	let notesContainer;
 
 	let noteIndex = 0;
 	const notesStruct = notes.split('\n').map((note, lineIndex) => {
@@ -17,15 +18,20 @@
 			notes: noteLine,
 		}
 	});
+	let lastLineIndex = 0;
 	$: currentPositionNormalized = currentPosition % noteIndex;
 	$: currentLineIndex = notesStruct.find((noteLine) => noteLine.start <= currentPositionNormalized && noteLine.end > currentPositionNormalized).index;
+	$: if (lastLineIndex !== currentLineIndex && notesContainer) {
+		lastLineIndex = currentLineIndex;
+		notesContainer.querySelector(`.line-${currentLineIndex}`).scrollIntoView({ block: 'center', behavior: 'smooth' });
+	}
 </script>
 
 
-<div class="notes">
+<div class="notes" bind:this={notesContainer}>
 	{#each notesStruct as noteLine}
 		<h1
-			class="noteLine"
+			class="noteLine line-{noteLine.index}"
 			class:highlighted={noteLine.index === currentLineIndex}
 		>
 			{#each noteLine.notes as note}
