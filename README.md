@@ -1,10 +1,10 @@
-# create-svelte
+# Kalimbabe
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A kalimba tablature editor and player.
 
-## Creating a project
+## Demo
 
-If you're seeing this, you've probably already done this step. Congrats!
+Link will go here
 
 ```bash
 # create a new project in the current directory
@@ -14,25 +14,19 @@ npm create svelte@latest
 npm create svelte@latest my-app
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Running
 
 ```bash
-npm run dev
+yarn
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+yarn dev
 ```
 
 ## Building
 
-To create a production version of your app:
+To create a production version:
 
 ```bash
-npm run build
+yarn
+yarn build
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
